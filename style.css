@@ -1,0 +1,48 @@
+* {
+    background-color: bisque;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+.board {
+    width: 498px;
+    height: 498px;
+    border: 10px solid darkgray;
+    background-color: lightgray;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.board div {
+    width: 53px;
+    height: 53px;
+    border: 1px solid white;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.topbar {
+    width: 498px;
+    height: 50px;
+    border: 10px solid darkgray;
+    background-color: lightgray;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mine-count {
+    background-color: lightgray;
+}
+.facesmile {
+    background-color: lightgray;
+    cursor: pointer;
+}
+.timer {
+    background-color: lightgray;
+}
