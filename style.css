@@ -28,7 +28,7 @@ h1 {
 }
 .topbar {
     width: 498px;
-    height: 50px;
+    height: 75px;
     border: 10px solid darkgray;
     background-color: lightgray;
     margin: 0 auto;
@@ -38,11 +38,24 @@ h1 {
 }
 .mine-count {
     background-color: lightgray;
+    font-size: 35px;
 }
 .facesmile {
+    text-align: center;
     background-color: lightgray;
+    width: 70px;
+    height: 65pxx;
+    border: 2px solid darkgray;
+    font-size: 35px;
     cursor: pointer;
 }
 .timer {
+    font-size: 35px;
     background-color: lightgray;
+}
+.lose {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -8,15 +8,16 @@ let gameOver = undefined;
 
 //Cache HTML element
 const boardEl = document.querySelector('.board');
-const faceSmileEl = document.querySelector('.facesmaile');
+const faceSmileEl = document.querySelector('.facesmile');
 const timerEl = document.querySelector('.timer');
+const lostEl = document.querySelector('.lose');
 
 // Initialise the game board:
 init();
 
 function init() {
     renderBoard();
-    placeMine();
+    setMine();
 }
 
 // -   Create an empty grid with cells roughly a 9x9(e.g., a 2D array)
@@ -37,22 +38,21 @@ function renderBoard() {
     console.log(board);
 }
 // -   Place mines randomly on the grid
-function placeMine() {
+function setMine() {
     let minesPlaced = 0;
     while (minesPlaced < minesCount) {
-        const r = Math.floor(Math.random() * rows);
-        const c = Math.floor(Math.random() * columns);
+        let r = Math.floor(Math.random() * rows);
+        let c = Math.floor(Math.random() * columns);
+        let id = r.toString() + '-' + c.toString();
+        console.log(id);
 
         if (!board[r][c].isMine) {
             board[r][c].isMine = true;
-            board[r][c].style.fontSize = '30px';
-            board[r][c].innerText = '💣';
-            board[r][c].style.backgroundColor = 'red';
             minesPlaced++;
         }
     }
+    return;
 }
-// -   Initialise all cells as hidden
 
 // Display the current game board
 // Prompt the player for their move (e.g., row and column)
@@ -61,6 +61,36 @@ function placeMine() {
 //         - Reveal all mines
 //         - Display "Game Over" message
 //         - End the game
+boardEl.addEventListener('click', function (event) {
+    if (gameOver) return;
+
+    const clickedCell = event.target;
+    const [row, column] = clickedCell.id.split('-').map(Number);
+    const cell = board[row][column];
+
+    if (cell.isMine) {
+        gameOver = true;
+        revealMines();
+        faceSmileEl.innerText = '🤯';
+        lostEl.innerText = 'Game Over! You hit a mine.';
+        return;
+    }
+});
+boardEl.addEventListener('contextMenu', function (event) {
+    if (gmaeOver) return;
+});
+
+function revealMines() {
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns; c++) {
+            if (board[r][c].isMine) {
+                board[r][c].innerText = '💣';
+                board[r][c].style.fontSize = '35px';
+                board[r][c].style.backgroundColor = 'red';
+            }
+        }
+    }
+}
 //     If it's not a mine:
 //     - Reveal the selected cell
 //         - If the cell has no adjacent mines:
@@ -84,3 +114,8 @@ function placeMine() {
 //     Display "You Win! Congratulations!"
 // Else if the game was lost:
 //     Display "Game Over! You hit a mine."
+
+const resetGame = faceSmileEl;
+resetGame.addEventListener('click', function () {
+    location.reload();
+});
