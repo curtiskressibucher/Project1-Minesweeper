@@ -16,6 +16,7 @@ init();
 
 function init() {
     renderBoard();
+    placeMine();
 }
 
 // -   Create an empty grid with cells roughly a 9x9(e.g., a 2D array)
@@ -25,8 +26,8 @@ function renderBoard() {
         for (let c = 0; c < columns; c++) {
             //Creating div elemenets inside of the html. <div></div>
             let cell = document.createElement('div');
+            //Create the id inside of the div. <div id="0-0"></div>
             cell.id = r.toString() + '-' + c.toString();
-            console.log(cell.id);
             boardEl.append(cell);
 
             rows.push(cell);
@@ -36,9 +37,23 @@ function renderBoard() {
     console.log(board);
 }
 // -   Place mines randomly on the grid
-// -   Initialise all cells as hidden and without flags
+function placeMine() {
+    let minesPlaced = 0;
+    while (minesPlaced < minesCount) {
+        const r = Math.floor(Math.random() * rows);
+        const c = Math.floor(Math.random() * columns);
 
-// Repeat until the game is won or lost:
+        if (!board[r][c].isMine) {
+            board[r][c].isMine = true;
+            board[r][c].style.fontSize = '30px';
+            board[r][c].innerText = '💣';
+            board[r][c].style.backgroundColor = 'red';
+            minesPlaced++;
+        }
+    }
+}
+// -   Initialise all cells as hidden
+
 // Display the current game board
 // Prompt the player for their move (e.g., row and column)
 // Check the selected cell:
