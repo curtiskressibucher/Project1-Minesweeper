@@ -25,6 +25,6 @@ Wireframe minesweeper
 6. Timer:
    Enable players to record their best game times. This feature will allow players to track and save their fastest completion times in the game.
 
-![My Wireframe](./Minesweper%20wireframe%20.png)
+![My Wireframe](./Images/Minesweper%20wireframe%20.png)
 
 ## Pseudocode.
