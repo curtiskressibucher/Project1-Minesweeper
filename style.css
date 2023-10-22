@@ -1,6 +1,7 @@
 * {
     background-color: bisque;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 h1 {
@@ -35,27 +36,75 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 5px;
 }
 .mine-count {
+    color: red;
     background-color: lightgray;
     font-size: 35px;
+    width: 70px;
+    height: 45px;
+    border: 2px solid darkgray;
+    text-align: center;
 }
 .facesmile {
     text-align: center;
     background-color: lightgray;
     width: 70px;
-    height: 65pxx;
+    height: 45px;
     border: 2px solid darkgray;
     font-size: 35px;
     cursor: pointer;
 }
 .timer {
+    color: red;
     font-size: 35px;
     background-color: lightgray;
+    width: 70px;
+    height: 45px;
+    border: 2px solid darkgray;
+    text-align: center;
 }
 .lose {
     color: black;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.mine-count-1 {
+    color: blue;
+    font-size: 30px;
+}
+.mine-count-2 {
+    color: green;
+    font-size: 35px;
+}
+.mine-count-3 {
+    color: maroon;
+    font-size: 35px;
+}
+.mine-count-4 {
+    color: red;
+    font-size: 35px;
+}
+.mine-count-5 {
+    color: magenta;
+    font-size: 35px;
+}
+.mine-count-6 {
+    color: gold;
+    font-size: 35px;
+}
+.mine-count-7 {
+    color: orange;
+    font-size: 35px;
+}
+.mine-count-8 {
+    color: black;
+    font-size: 35px;
+}
+footer {
+    text-align: center;
+    font-size: 15px;
 }

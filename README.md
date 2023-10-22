@@ -76,22 +76,33 @@ Else if the game was lost:
 
 ## Learning along the way!
 
-```
-    I found this method to create a 2D array for the board by adding div elements inside a div element with the class 'board.' This allows you to create a board without having to manually add all 81 individual cells. As well as give them Ids to identify them later on.
+I found this method to create a 2D array for the board by adding div elements inside a div element with the class 'board.' This allows you to create a board without having to manually add all 81 individual cells. As well as give them Ids to identify them later on.
 
-    I went from having 81 divs to using the createElement method to create all my divs for me.
-                <!-- <div class="c0r0" id="cell"></div> + 80 -->
-    board = [
-        [0-0, 0-1, 0-2, 0-3, 0-4, 0-5, 0-6, 0-7, 0-8],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    ];
+I went from having 81 divs to using the createElement method to create all my divs for me.
+
+<!-- <div class="c0r0" id="cell"></div> + 80 -->
+
+board = [
+[0-0, 0-1, 0-2, 0-3, 0-4, 0-5, 0-6, 0-7, 0-8],
+]
+
+Here is the code I used
+
+```js
+    function renderBoard() {
+    for (let r = 0; r < rows; r++) {
+        let rows = [];
+        for (let c = 0; c < columns; c++) {
+            //Creating div elements inside of the html. <div></div>
+            let cell = document.createElement('div');
+            //Create the id inside of the div. <div id="0-0"></div>
+            cell.id = r.toString() + '-' + c.toString();
+            boardEl.append(cell);
+
+            rows.push(cell);
+        }
+        board.push(rows);
+    }
 ```
 
 [MDN createELement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
