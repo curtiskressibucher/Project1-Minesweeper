@@ -9,6 +9,7 @@ h1 {
 }
 
 .board {
+    position: relative;
     width: 498px;
     height: 498px;
     border: 10px solid darkgray;
@@ -16,6 +17,8 @@ h1 {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 .board div {
     width: 53px;
@@ -107,4 +110,11 @@ h1 {
 footer {
     text-align: center;
     font-size: 15px;
+}
+.bomb {
+    position: absolute;
+    background: transparent;
+    border: none;
+    width: 490px;
+    height: 490px;
 }

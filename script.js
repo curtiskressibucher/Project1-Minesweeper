@@ -2,9 +2,9 @@
 let board = [];
 const rows = 9;
 const columns = 9;
-const minesCount = 10;
+const minesCount = 1;
 let flag = false;
-let flagCount = minesCount;
+let flagPlaced = 0;
 let gameOver = undefined;
 let timer = null;
 let seconds = 0;
@@ -15,6 +15,7 @@ const faceSmileEl = document.querySelector('.facesmile');
 const timerEl = document.querySelector('.timer');
 const lostEl = document.querySelector('.lose');
 const mineCountEl = document.querySelector('.mine-count');
+// const bombEl = document.querySelector('.bomb');
 
 // Initialise the game board:
 init();
@@ -60,6 +61,8 @@ function setMine() {
     mineCountEl.innerText = minesCount;
     return;
 }
+// Hidding the bomb gif.
+// bombEl.style.display = 'none';
 
 // Display the current game board
 // Prompt the player for their move (e.g., row and column)
@@ -70,14 +73,10 @@ function setMine() {
 //         - End the game
 // - Main event listner for left clicks
 boardEl.addEventListener('click', function (event) {
-    if (gameOver) return;
-
-    if (!timer) {
-        timer = setInterval(function () {
-            seconds++;
-            updateTimer();
-        }, 1000);
+    if (gameOver) {
+        return;
     }
+    settimer();
 
     const clickedCell = event.target;
     // Using the .map() method with the funciton number I am able to turn my split string now into an array of numbers.
@@ -85,7 +84,8 @@ boardEl.addEventListener('click', function (event) {
     //Link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
     const [row, column] = clickedCell.id.split('-').map(Number);
     const cell = board[row][column];
-
+    // If the game was lost:
+    //     Display "Game Over! You hit a mine."
     if (cell.isMine) {
         gameOver = true;
         revealMines();
@@ -93,6 +93,7 @@ boardEl.addEventListener('click', function (event) {
         lostEl.innerText = 'Game Over! You hit a mine.';
         clearInterval(timer);
         timer = null;
+        // bombEl.style.display = 'block';
         return;
     } else {
         // Check if the cell is already revealed
@@ -102,6 +103,8 @@ boardEl.addEventListener('click', function (event) {
             const adjacentMines = countAdjacentMines(row, column);
 
             if (adjacentMines === 0) {
+                floodFill(row, column);
+                clickedCell.style.backgroundColor = 'darkgray';
                 // If no adjacent mines, reveal adjacent cells recursively
             } else {
                 // Display the number of adjacent mines
@@ -114,8 +117,38 @@ boardEl.addEventListener('click', function (event) {
 });
 // If the game was won:
 //     Display "You Win! Congratulations!"
-// Else if the game was lost:
-//     Display "Game Over! You hit a mine."
+boardEl.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+
+    if (gameOver) {
+        return;
+    }
+
+    settimer();
+
+    const clickedCell = event.target;
+    const [row, column] = clickedCell.id.split('-').map(Number);
+    const cell = board[row][column];
+
+    if (cell.isRevealed) {
+        return;
+    }
+
+    if (!cell.isFlagged && flagPlaced < minesCount) {
+        cell.isFlagged = true;
+        flagPlaced++;
+        clickedCell.style.fontSize = '35px';
+        clickedCell.innerText = '🚩';
+        mineCountEl.innerText = minesCount - flagPlaced;
+    } else if (cell.isFlagged) {
+        cell.isFlagged = false;
+        clickedCell.innerText = '';
+        flagPlaced--;
+        mineCountEl.innerText = minesCount - flagPlaced;
+    }
+
+    console.log(clickedCell);
+});
 
 function revealMines() {
     for (let r = 0; r < rows; r++) {
@@ -128,9 +161,39 @@ function revealMines() {
         }
     }
 }
+
 //     If it's not a mine:
 //     - Reveal the selected cell
 //         - If the cell has no adjacent mines:
+function floodFill(row, col) {
+    if (row < 0 || row >= rows || col < 0 || col >= columns) {
+        return;
+    }
+    const cell = board[row][col];
+
+    if (cell.isRevealed) {
+        return;
+    }
+    cell.isRevealed = true;
+    cell.style.backgroundColor = 'darkgray';
+    const adjacentMines = countAdjacentMines(row, col);
+
+    // This part will make the flood fill recursive, so that it will check the cells in 3x3
+    if (adjacentMines === 0) {
+        for (let r = -1; r <= 1; r++) {
+            for (let c = -1; c <= 1; c++) {
+                const newRow = row + r;
+                const newCol = col + c;
+                floodFill(newRow, newCol);
+            }
+        }
+    } else {
+        cell.innerText = adjacentMines;
+        cell.style.backgroundColor = 'darkgray';
+        cell.classList.add(`mine-count-${adjacentMines}`);
+    }
+}
+
 //             - Reveal all adjacent cells with no mines recursively
 
 //         - If the cell has mines adjacent, display the corresponding number of mines touching that cell.
@@ -172,8 +235,17 @@ function countAdjacentMines(row, col) {
 }
 
 //Timer for player PR
+function settimer() {
+    if (!timer) {
+        timer = setInterval(function () {
+            seconds++;
+            updateTimer();
+        }, 1000);
+    }
+}
+
 function updateTimer() {
-    //Using padStart to to update the string with the extra zeros.
+    //Using padStart to to update the string with the extra zeros. As seen as 000 instead of 0.
     //Link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
     const formatedTime = seconds.toString().padStart(3, '0');
     timerEl.innerText = formatedTime;

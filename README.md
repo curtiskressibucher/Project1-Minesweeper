@@ -51,6 +51,7 @@ Check the selected cell:
     If it's not a mine:
     - Reveal the selected cell
         - If the cell has no adjacent mines:
+            * Flood fill al
             - Reveal all adjacent cells with no mines recursively
         - If the cell has mines adjacent, display the corresponding number of mines touching that cell.
 
@@ -105,4 +106,20 @@ Here is the code I used
     }
 ```
 
-[MDN createELement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
+-   [MDN createELement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
+
+When looking into right-click functionality for placing a flag, I found that the event listener method for this is called 'context menu'. However, when using this event listener, it's important to remember to add 'preventDefault' to the event. By default, a right-click can open up the context menu, and by applying 'preventDefault,' you should be able to use the right-click for your intended action on whatever element you want.
+
+```js
+boardEl.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+
+    if (gameOver) {
+        return;
+    }
+    const clickedCell = event.target;
+    console.log(clickedCell);
+});
+```
+
+-   [MDN contextmenu](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event)
