@@ -15,7 +15,7 @@ const faceSmileEl = document.querySelector('.facesmile');
 const timerEl = document.querySelector('.timer');
 const lostEl = document.querySelector('.lose');
 const mineCountEl = document.querySelector('.mine-count');
-// const bombEl = document.querySelector('.bomb');
+const bombEl = document.querySelector('.bomb');
 
 // Initialise the game board:
 init();
@@ -62,7 +62,7 @@ function setMine() {
     return;
 }
 // Hidding the bomb gif.
-// bombEl.style.display = 'none';
+bombEl.style.display = 'none';
 
 // Display the current game board
 // Prompt the player for their move (e.g., row and column)
@@ -93,7 +93,7 @@ boardEl.addEventListener('click', function (event) {
         lostEl.innerText = 'Game Over! You hit a mine.';
         clearInterval(timer);
         timer = null;
-        // bombEl.style.display = 'block';
+        bombEl.style.display = 'block';
         return;
     } else {
         // Check if the cell is already revealed
@@ -103,7 +103,7 @@ boardEl.addEventListener('click', function (event) {
             const adjacentMines = countAdjacentMines(row, column);
 
             if (adjacentMines === 0) {
-                floodFill(row, column);
+                // floodFill(row, column);
                 clickedCell.style.backgroundColor = 'darkgray';
                 // If no adjacent mines, reveal adjacent cells recursively
             } else {
@@ -229,6 +229,7 @@ function countAdjacentMines(row, col) {
         for (let c = -1; c <= 1; c++) {
             const newRow = row + r;
             const newCol = col + c;
+            console.log(newRow, newCol);
 
             if (
                 newRow >= 0 &&
