@@ -2,7 +2,7 @@
 let board = [];
 const rows = 9;
 const columns = 9;
-const minesCount = 1;
+const minesCount = 10;
 let flag = false;
 let flagPlaced = 0;
 let gameOver = undefined;
@@ -177,14 +177,26 @@ function floodFill(row, col) {
     cell.isRevealed = true;
     cell.style.backgroundColor = 'darkgray';
     const adjacentMines = countAdjacentMines(row, col);
-
     // This part will make the flood fill recursive, so that it will check the cells in 3x3
     if (adjacentMines === 0) {
         for (let r = -1; r <= 1; r++) {
+            console.log(r);
             for (let c = -1; c <= 1; c++) {
                 const newRow = row + r;
                 const newCol = col + c;
-                floodFill(newRow, newCol);
+                console.log(newCol, newRow);
+                if (
+                    newRow >= 0 &&
+                    newRow < rows &&
+                    newCol >= 0 &&
+                    newCol < columns
+                ) {
+                    if (board[newRow][newCol].isMine) {
+                        console.log(board[newRow][newCol]);
+                        count++;
+                    }
+                    floodFill(newRow, newCol);
+                }
             }
         }
     } else {
