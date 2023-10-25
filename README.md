@@ -1,5 +1,17 @@
 # Minesweeper Game
 
+Minesweeper is a classic single-player game that was included in all Microsoft Windows operating systems in the early 1990s. The basic premise of the game is to clear the board of all the tiles without hitting a bomb. As you progress, you're able to plant flags at locations where you think there are bombs. Minesweeper was created by Curt Johnson in 1989 for the IBM OS/2 operating system.
+
+The basic gameplay starts with a square grid with a varying number of cells. Once clicked, it will reveal either a number indicating the number of mines adjacent to it or a mine, which will end the game. The numbers in those cells provide clues to the player about where the mines might be.
+
+Minesweeper is a classic puzzle game that requires players to uncover safe cells on a grid while avoiding hidden mines. It has a simple yet engaging gameplay style and has had a lasting impact on computer gaming culture, particularly during the era of Windows 3.1 and subsequent Windows versions.
+
+## To start the game.
+
+-   To start my version of Minesweeper, please click the link. {}
+-   Once you're loaded in, start clicking on the grid to try and find all the hidden mines.
+-   You can also right-click to use flags to mark where you think they might be.
+
 ## Initial wireframe of the game.
 
 Wireframe minesweeper
@@ -75,6 +87,20 @@ Else if the game was lost:
 
 ```
 
+## Screenshots of progress.
+
+### Original Minesweeper
+
+![Original minesweeper](./Images/Screenshot%202023-10-19%20at%201.31.26%20pm.png)
+
+### The begining of the logic of my game.
+
+![Game logic](./Images/Screenshot%202023-10-22%20at%2010.12.29%20am.png)
+
+### The first touch of style
+
+![First style](./Images/Add%20some%20style%20Minesweeper%202023.png)
+
 ## Learning along the way!
 
 I found this method to create a 2D array for the board by adding div elements inside a div element with the class 'board.' This allows you to create a board without having to manually add all 81 individual cells. As well as give them Ids to identify them later on.
@@ -123,3 +149,14 @@ boardEl.addEventListener('contextmenu', function (event) {
 ```
 
 -   [MDN contextmenu](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event)
+
+One small thing that I learned was padStart, which is a string method that can increase the string length by declaring how long you want it to be. In my case, I wanted to maintain the string length for my timer at "000". To achieve this, I simply converted my seconds into a string and specified the desired length of 3.
+
+```js
+function updateTimer() {
+    const formatedTime = seconds.toString().padStart(3, '0');
+    timerEl.innerText = formatedTime;
+}
+```
+
+-   [MDN padStart](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)

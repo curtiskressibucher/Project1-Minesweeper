@@ -1,13 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One');
+
 * {
-    background-color: bisque;
     box-sizing: border-box;
     font-family: sans-serif;
+}
+html {
+    background-color: bisque;
+    background: url('./Images/pexels-photo-388415.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
+    background-position: center, center;
 }
 
 h1 {
     text-align: center;
+    font-family: 'Black Ops One', sans-serif;
+    background-image: url(./Images/Mines-705x360-1.webp);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.5);
+    text-decoration: underline;
+    color: rgb(33, 31, 31);
+    border: 5px solid black;
+    margin: 30px;
 }
-
+.start-game {
+    font-family: 'Black Ops One', sans-serif;
+    color: rgb(188, 187, 187);
+    text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.board-container {
+}
 .board {
     position: relative;
     width: 498px;
@@ -43,7 +76,7 @@ h1 {
 }
 .mine-count {
     color: red;
-    background-color: lightgray;
+    background-color: rgb(64, 64, 64);
     font-size: 35px;
     width: 70px;
     height: 45px;
@@ -52,7 +85,7 @@ h1 {
 }
 .facesmile {
     text-align: center;
-    background-color: lightgray;
+    background-color: rgb(64, 64, 64);
     width: 70px;
     height: 45px;
     border: 2px solid darkgray;
@@ -62,17 +95,28 @@ h1 {
 .timer {
     color: red;
     font-size: 35px;
-    background-color: lightgray;
+    background-color: rgb(64, 64, 64);
     width: 70px;
     height: 45px;
     border: 2px solid darkgray;
     text-align: center;
 }
+
 .lose {
+    position: absolute;
+    background: transparent;
     color: black;
+    font-size: 24px;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.game-rules {
+    text-align: center;
+    font-family: 'Black Ops One', sans-serif;
+    color: rgb(33, 31, 31);
+    text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.5);
 }
 
 .mine-count-1 {
@@ -110,11 +154,19 @@ h1 {
 footer {
     text-align: center;
     font-size: 15px;
+    font-family: 'Black Ops One', sans-serif;
+    color: rgb(172, 172, 172);
+    text-decoration: underline;
 }
 .bomb {
     position: absolute;
-    background: transparent;
     border: none;
     width: 490px;
     height: 490px;
+}
+.trophy {
+    background: transparent;
+    position: absolute;
+    width: 300px;
+    height: 300px;
 }

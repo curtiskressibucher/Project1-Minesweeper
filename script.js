@@ -3,7 +3,6 @@ let board = [];
 const rows = 9;
 const columns = 9;
 const minesCount = 10;
-let flag = false;
 let flagPlaced = 0;
 let gameOver = undefined;
 let timer = null;
@@ -16,6 +15,7 @@ const timerEl = document.querySelector('.timer');
 const lostEl = document.querySelector('.lose');
 const mineCountEl = document.querySelector('.mine-count');
 const bombEl = document.querySelector('.bomb');
+const trophyEl = document.querySelector('.trophy');
 
 // Initialise the game board:
 init();
@@ -43,6 +43,7 @@ function renderBoard() {
     }
     console.log(board);
 }
+
 // -   Place mines randomly on the grid
 function setMine() {
     let minesPlaced = 0;
@@ -61,8 +62,10 @@ function setMine() {
     mineCountEl.innerText = minesCount;
     return;
 }
-// Hidding the bomb gif.
+
+// Hidding the gifs.
 bombEl.style.display = 'none';
+trophyEl.style.display = 'none';
 
 // Display the current game board
 // Prompt the player for their move (e.g., row and column)
@@ -103,7 +106,6 @@ boardEl.addEventListener('click', function (event) {
             const adjacentMines = countAdjacentMines(row, column);
 
             if (adjacentMines === 0) {
-                // floodFill(row, column);
                 clickedCell.style.backgroundColor = 'darkgray';
                 // If no adjacent mines, reveal adjacent cells recursively
             } else {
@@ -171,7 +173,7 @@ function floodFill(row, col) {
     }
     const cell = board[row][col];
 
-    if (cell.isRevealed) {
+    if (!cell.isRevealed) {
         return;
     }
     cell.isRevealed = true;
@@ -191,10 +193,6 @@ function floodFill(row, col) {
                     newCol >= 0 &&
                     newCol < columns
                 ) {
-                    if (board[newRow][newCol].isMine) {
-                        console.log(board[newRow][newCol]);
-                        count++;
-                    }
                     floodFill(newRow, newCol);
                 }
             }
@@ -229,7 +227,6 @@ function countAdjacentMines(row, col) {
         for (let c = -1; c <= 1; c++) {
             const newRow = row + r;
             const newCol = col + c;
-            console.log(newRow, newCol);
 
             if (
                 newRow >= 0 &&

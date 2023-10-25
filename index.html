@@ -10,27 +10,33 @@
     <body>
         <header>
             <h1>Minesweeper</h1>
-            <hr color="black" />
-            <h2 class="lose">
+            <h2 class="start-game">
                 Start game by clicking tiles. Right click to use flags.
             </h2>
+            <h3 class="game-rules">
+                To play the game, you must clear the minefield and mark the
+                bombs with a flag.
+            </h3>
+        </header>
+        <div class="board-container">
             <div class="topbar">
                 <div class="mine-count"></div>
                 <div class="facesmile">🙂</div>
                 <div class="timer">000</div>
             </div>
-        </header>
-        <div class="board">
-            <img
-                class="bomb"
-                src="./Images/Nuke it from orbit - Imgur.gif"
-                alt="Exploding"
-            />
-            <!-- <div class="c0r0" id="cell"></div> + 80 -->
-        </div>
+            <div class="board">
+                <img
+                    class="bomb"
+                    src="./Images/Nuke it from orbit - Imgur.gif"
+                    alt="Exploding"
+                />
+                <h2 class="lose"></h2>
+                <h2 class="win"></h2>
 
-        <!-- link: https://giphy.com/gifs/lT4Ix992z2zfO -->
-        <!-- link: https://bestcorporateevents.com/practice-innovative-problem-solving Minefeild image -->
+                <img class="trophy" src="./Images/XqyT.gif" alt="Trophy" />
+                <!-- <div class="c0r0" id="cell"></div> + 80 -->
+            </div>
+        </div>
     </body>
     <footer>To replay the game click on the emoji.</footer>
 </html>
