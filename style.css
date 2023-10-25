@@ -104,14 +104,23 @@ h1 {
 
 .lose {
     position: absolute;
-    background: transparent;
     color: black;
     font-size: 24px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
+.win {
+    position: absolute;
+    color: black;
+    font-size: 24px;
+    text-align: center;
+    display: flex;
+    z-index: 2;
+}
+
 .game-rules {
     text-align: center;
     font-family: 'Black Ops One', sans-serif;
@@ -163,10 +172,13 @@ footer {
     border: none;
     width: 490px;
     height: 490px;
+    z-index: 1;
 }
 .trophy {
-    background: transparent;
+    background: red;
     position: absolute;
     width: 300px;
     height: 300px;
+    background-image: url();
+    z-index: 1;
 }
