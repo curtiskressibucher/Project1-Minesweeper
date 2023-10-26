@@ -6,11 +6,23 @@ The basic gameplay starts with a square grid with a varying number of cells. Onc
 
 Minesweeper is a classic puzzle game that requires players to uncover safe cells on a grid while avoiding hidden mines. It has a simple yet engaging gameplay style and has had a lasting impact on computer gaming culture, particularly during the era of Windows 3.1 and subsequent Windows versions.
 
+# About my project.
+
+My project is a classic Minesweeper game, but it may look different from the original due to the modern CSS effects I've applied for a more contemporary and visually appealing design
+
 ## To start the game.
 
--   To start my version of Minesweeper, please click the link. {}
+-   To start my version of Minesweeper, please click the link. [My Minesweeper](https://curtiskressibucher.github.io/Project1-Minesweeper/)
 -   Once you're loaded in, start clicking on the grid to try and find all the hidden mines.
 -   You can also right-click to use flags to mark where you think they might be.
+
+#### Downloading Files
+
+To download my files for the game and modify it yourself, follow these steps in the terminal:
+
+1. Git clone the URL from the big green "Code" button.
+2. Change directory (cd) into the folder.
+3. Then, open the folder with whatever code editor you are using.
 
 ## Initial wireframe of the game.
 
@@ -89,7 +101,7 @@ Else if the game was lost:
 
 ## Screenshots of progress.
 
-### Original Minesweeper
+### Original Minesweeper.
 
 ![Original minesweeper](./Images/Screenshot%202023-10-19%20at%201.31.26%20pm.png)
 
@@ -97,9 +109,13 @@ Else if the game was lost:
 
 ![Game logic](./Images/Screenshot%202023-10-22%20at%2010.12.29%20am.png)
 
-### The first touch of style
+### The first touch of style.
 
 ![First style](./Images/Add%20some%20style%20Minesweeper%202023.png)
+
+### Adding difficulty levels and playing game.
+
+![Difficulty level](./Images/Screenshot%202023-10-26%20at%206.28.57%20pm.png)
 
 ## Learning along the way!
 
@@ -160,3 +176,29 @@ function updateTimer() {
 ```
 
 -   [MDN padStart](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
+
+I learned how to add transitions to elements in CSS to create really nice hover effects on the difficulty buttons.
+
+```css
+.level-container button {
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #555;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+```
+
+-   [MDN transotion](https://developer.mozilla.org/en-US/docs/Web/CSS/transition)
+
+## Future Features
+
+-   he ability to store the player's personal record for finishing the game.
+-   Add more animations to the game.
+-   Include some cool sound effects.

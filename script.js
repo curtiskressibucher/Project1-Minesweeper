@@ -1,10 +1,10 @@
 //Declare our variables
-let board = [];
-const rows = 9;
-const columns = 9;
+let rows = 9;
+let columns = 9;
 const beginnerMineCount = 10;
 const intermediateMineCount = 20;
 const advancedMineCount = 30;
+let board = [];
 let gameOver = undefined;
 let timer = null;
 let seconds = 0;
@@ -38,6 +38,8 @@ function Init() {
     setMine(minesCount);
     updateTimer();
 }
+
+// Difficulty level functions.
 function beginnerInit() {
     const minesCount = beginnerMineCount;
     clearMines();
@@ -62,7 +64,12 @@ function advancedInit() {
     updateMineCount();
     updateTimer();
 }
-// Prompt the player for their move (e.g., row and column)
+
+// ==============================================================================================
+
+// Event Listners:
+
+// Prompt the player for their move
 // Check the selected cell:
 // - Main event listner for left clicks
 boardEl.addEventListener('click', function (event) {
@@ -77,8 +84,7 @@ boardEl.addEventListener('click', function (event) {
     //Link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
     const [row, column] = clickedCell.id.split('-').map(Number);
     const cell = board[row][column];
-    //     If it's a mine:
-    //         - Reveal all mines - Display "Game Over" message - End the game
+    //     If it's a mine: Reveal all mines - Display "Game Over" message - End the game
     if (cell.isMine) {
         gameOver = true;
         revealMines();
@@ -86,7 +92,9 @@ boardEl.addEventListener('click', function (event) {
         lostEl.innerText = 'Game Over! You hit a mine.';
         clearInterval(timer);
         timer = null;
-        bombEl.style.display = 'block';
+        setTimeout(function () {
+            bombEl.style.display = 'block';
+        }, 750);
         return;
     } else {
         // Check if the cell is already revealed
@@ -117,6 +125,7 @@ boardEl.addEventListener('click', function (event) {
         timer = null;
     }
 });
+
 // Right click event to place flags
 boardEl.addEventListener('contextmenu', function (event) {
     // Needed to prevent the default context menu.
@@ -165,6 +174,10 @@ const resetGame = faceSmileEl;
 resetGame.addEventListener('click', function () {
     location.reload();
 });
+
+// ==============================================================================================
+
+// Functions:
 
 function clearMines() {
     for (let r = 0; r < rows; r++) {
@@ -215,10 +228,6 @@ function setMine(minesCount) {
     mineCountEl.innerText = minesCount;
     return;
 }
-
-// Hidding the gifs.
-bombEl.style.display = 'none';
-trophyEl.style.display = 'none';
 
 function updateMineCount() {
     let remainingMines = mineCount - flagPlaced;
@@ -295,6 +304,10 @@ function updateTimer() {
     timerEl.innerText = formatedTime;
 }
 
+// Hidding the gifs.
+bombEl.style.display = 'none';
+trophyEl.style.display = 'none';
+
 // ==============================================================================================
 //     If it's not a mine:
 //     - Reveal the selected cell
@@ -337,4 +350,5 @@ function updateTimer() {
 //         cell.classList.add(`mine-count-${adjacentMines}`);
 //     }
 // }
+
 // ==============================================================================================
