@@ -1,14 +1,14 @@
 # Minesweeper Game
 
-Minesweeper is a classic single-player game that was included in all Microsoft Windows operating systems in the early 1990s. The basic premise of the game is to clear the board of all the tiles without hitting a bomb. As you progress, you're able to plant flags at locations where you think there are bombs. Minesweeper was created by Curt Johnson in 1989 for the IBM OS/2 operating system.
-
-The basic gameplay starts with a square grid with a varying number of cells. Once clicked, it will reveal either a number indicating the number of mines adjacent to it or a mine, which will end the game. The numbers in those cells provide clues to the player about where the mines might be.
+Minesweeper is a classic single-player game created by Curt Johnson in 1989 for the IBM OS/2 operating system, that was included in all Microsoft Windows operating systems in the early 1990s. The basic premise of the game is to clear the board of all the tiles without hitting a bomb. As you progress, you're able to plant flags on the grid where you think the bombs are located.
 
 Minesweeper is a classic puzzle game that requires players to uncover safe cells on a grid while avoiding hidden mines. It has a simple yet engaging gameplay style and has had a lasting impact on computer gaming culture, particularly during the era of Windows 3.1 and subsequent Windows versions.
 
+The basic gameplay starts with a square grid with a varying number of cells. Once clicked, it will reveal either a number indicating the number of mines adjacent to the cell or a mine, which will end the game. The numbers in those cells provide clues to the player about where the mines might be located.
+
 # About my project.
 
-My project is a classic Minesweeper game, but it may look different from the original due to the modern CSS effects I've applied for a more contemporary and visually appealing design
+My project is a classic Minesweeper game, but it may look different from the original due to the modern CSS effects I've applied for a more contemporary and visually appealing design.
 
 ## To start the game.
 
@@ -119,9 +119,9 @@ Else if the game was lost:
 
 ## Bugs to fix
 
--   The difficulty levels are a little broken. If you click on a difficulty halfway through, it can cause a problem where cells that have already been clicked could become bombs.
+-   The difficulty levels are a little broken if you click on a difficulty level halfway through the game. Difficulty levels must be chosen before the game starts, otherwise it can cause a problem where cells that have previously been clicked, could become bombs.
 
--   There is a bug when it comes to the board because I used a loop to create the divs that would be the cells. When trying to modify the size of the board in terms of rows, columns, or even just the board size, it can cause it to become strange and not work well as a grid.
+-   There is a bug when it comes to the board due to a loop I created where the divs that would become the cells. When trying to modify the size of the board in terms of rows, columns, or the board size, it can cause the board to become irregular, keeping the same amount of rows but increasing the number of columns. This results in the grid being unable to maintan its usual formation. A possible solution would be to make the board size adaptable to the amount of rows and columns.
 
 ## Learning along the way!
 
@@ -135,7 +135,7 @@ board = [
 [0-0, 0-1, 0-2, 0-3, 0-4, 0-5, 0-6, 0-7, 0-8],
 ]
 
-Here is the code I used
+Here is the code I used;
 
 ```js
     function renderBoard() {
@@ -172,7 +172,7 @@ boardEl.addEventListener('contextmenu', function (event) {
 
 -   [MDN contextmenu](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event)
 
-One small thing that I learned was padStart, which is a string method that can increase the string length by declaring how long you want it to be. In my case, I wanted to maintain the string length for my timer at "000". To achieve this, I simply converted my seconds into a string and specified the desired length of 3.
+One small thing that I learned was padStart, which is a string method that can increase the string length by declaring the desired length. In my case, I wanted to maintain the string length for my timer at "000". To achieve this, I simply converted my seconds into a string and specified the desired length of 3.
 
 ```js
 function updateTimer() {
@@ -183,7 +183,7 @@ function updateTimer() {
 
 -   [MDN padStart](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
 
-I learned how to add transitions to elements in CSS to create really nice hover effects on the difficulty buttons.
+I learned how to add transitions to elements in CSS to create a really nice hover effect on the difficulty buttons.
 
 ```css
 .level-container button {
@@ -198,6 +198,12 @@ I learned how to add transitions to elements in CSS to create really nice hover 
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+.level-container button:hover {
+    background-color: #555;
+    color: #ffcc00;
+    border-color: #777;
 }
 ```
 
