@@ -31,6 +31,13 @@ h1 {
     border: 5px solid black;
     margin: 30px;
 }
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 30px;
+    }
+}
+
 .start-game {
     font-family: 'Black Ops One', sans-serif;
     color: rgb(188, 187, 187);
@@ -42,6 +49,8 @@ h1 {
 }
 
 /*=====================================================================*/
+
+/* The game board. */
 
 .board-container {
     display: flex;
@@ -71,6 +80,8 @@ h1 {
 }
 
 /*=====================================================================*/
+
+/* Bar for the game. */
 
 .topbar {
     width: 498px;
@@ -113,6 +124,8 @@ h1 {
 
 /*=====================================================================*/
 
+/* Win/lose styles */
+
 .lose {
     font-family: 'Black Ops One', sans-serif;
     position: absolute;
@@ -134,7 +147,25 @@ h1 {
     z-index: 2;
 }
 
+.bomb {
+    position: absolute;
+    border: none;
+    width: 490px;
+    height: 490px;
+    z-index: 1;
+}
+.trophy {
+    position: absolute;
+    width: 490px;
+    height: 490px;
+    background-image: url(./Images/JNVS.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+}
 /*=====================================================================*/
+
+/* Adjacent mine number */
 
 .mine-count-1 {
     color: blue;
@@ -171,24 +202,7 @@ h1 {
 
 /*=====================================================================*/
 
-.bomb {
-    position: absolute;
-    border: none;
-    width: 490px;
-    height: 490px;
-    z-index: 1;
-}
-.trophy {
-    position: absolute;
-    width: 490px;
-    height: 490px;
-    background-image: url(./Images/JNVS.gif);
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 1;
-}
-
-/*=====================================================================*/
+/* Difficulty styling */
 
 h4 {
     display: flex;

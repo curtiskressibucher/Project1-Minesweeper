@@ -29,24 +29,22 @@ const intermediateButton = document.querySelector('.intermediate');
 const advancedButton = document.querySelector('.advanced');
 
 // Initialise the game board:
-Init();
+init();
 
-function Init() {
+function init(rows, columns) {
     const minesCount = beginnerMineCount;
-    renderBoard();
+    renderBoard(rows, columns);
     mineCount = minesCount;
     setMine(minesCount);
-    updateTimer();
 }
 
 // Difficulty level functions.
 function beginnerInit() {
     const minesCount = beginnerMineCount;
+    mineCount = minesCount;
     clearMines();
     setMine(minesCount);
-    mineCount = minesCount;
     updateMineCount();
-    updateTimer();
 }
 function intermediateInit() {
     const minesCount = intermediateMineCount;
@@ -54,7 +52,6 @@ function intermediateInit() {
     clearMines();
     setMine(minesCount);
     updateMineCount();
-    updateTimer();
 }
 function advancedInit() {
     const minesCount = advancedMineCount;
@@ -62,7 +59,6 @@ function advancedInit() {
     clearMines();
     setMine(minesCount);
     updateMineCount();
-    updateTimer();
 }
 
 // ==============================================================================================
@@ -92,9 +88,8 @@ boardEl.addEventListener('click', function (event) {
         lostEl.innerText = 'Game Over! You hit a mine.';
         clearInterval(timer);
         timer = null;
-        setTimeout(function () {
-            bombEl.style.display = 'block';
-        }, 750);
+        bombEl.style.display = 'block';
+
         return;
     } else {
         // Check if the cell is already revealed
@@ -159,6 +154,8 @@ boardEl.addEventListener('contextmenu', function (event) {
     console.log(clickedCell);
 });
 
+// Difficulty Event listeners
+
 beginnerButton.addEventListener('click', function () {
     beginnerInit();
 });
@@ -179,13 +176,6 @@ resetGame.addEventListener('click', function () {
 
 // Functions:
 
-function clearMines() {
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < columns; c++) {
-            board[r][c].isMine = false;
-        }
-    }
-}
 // Displays the current game board
 // -   Create an empty grid with cells roughly a 9x9(e.g., a 2D array)
 function renderBoard() {
@@ -229,6 +219,7 @@ function setMine(minesCount) {
     return;
 }
 
+// Update the mine count based on the difficulty level
 function updateMineCount() {
     let remainingMines = mineCount - flagPlaced;
     mineCountEl.innerText = remainingMines;
@@ -242,6 +233,7 @@ function updateMineCount() {
     }
 }
 
+// Revealing mines. (Incase the gifs fail the game will still have a lose ablity)
 function revealMines() {
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < columns; c++) {
@@ -263,14 +255,15 @@ function revealMines() {
 //                  / | \
 //                /   |  \
 //             S.W    S   S.E
-
 function countAdjacentMines(row, col) {
+    // Initialize a count variable to keep track of adjacent mines.
     let count = 0;
+    //Loop through a 3x3 grid of cells around the specified row and column.
     for (let r = -1; r <= 1; r++) {
         for (let c = -1; c <= 1; c++) {
             const newRow = row + r;
             const newCol = col + c;
-
+            // Check if the new coordinates are within the valid bounds of the game board.
             if (
                 newRow >= 0 &&
                 newRow < rows &&
@@ -285,6 +278,15 @@ function countAdjacentMines(row, col) {
         }
     }
     return count;
+}
+
+// Clearing mines
+function clearMines() {
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns; c++) {
+            board[r][c].isMine = false;
+        }
+    }
 }
 
 //Timer for player PR
@@ -307,48 +309,3 @@ function updateTimer() {
 // Hidding the gifs.
 bombEl.style.display = 'none';
 trophyEl.style.display = 'none';
-
-// ==============================================================================================
-//     If it's not a mine:
-//     - Reveal the selected cell
-//         - If the cell has no adjacent mines:
-//          - Reveal all adjacent cells with no mines recursively
-
-// function floodFill(row, col) {
-//     if (row < 0 || row >= rows || col < 0 || col >= columns) {
-//         return;
-//     }
-//     const cell = board[row][col];
-
-//     if (!cell.isRevealed) {
-//         return;
-//     }
-//     cell.isRevealed = true;
-//     cell.style.backgroundColor = 'darkgray';
-//     const adjacentMines = countAdjacentMines(row, col);
-//     // This part will make the flood fill recursive, so that it will check the cells in 3x3
-//     if (adjacentMines === 0) {
-//         for (let r = -1; r <= 1; r++) {
-//             console.log(r);
-//             for (let c = -1; c <= 1; c++) {
-//                 const newRow = row + r;
-//                 const newCol = col + c;
-//                 console.log(newCol, newRow);
-//                 if (
-//                     newRow >= 0 &&
-//                     newRow < rows &&
-//                     newCol >= 0 &&
-//                     newCol < columns
-//                 ) {
-//                     floodFill(newRow, newCol);
-//                 }
-//             }
-//         }
-//     } else {
-//         cell.innerText = adjacentMines;
-//         cell.style.backgroundColor = 'darkgray';
-//         cell.classList.add(`mine-count-${adjacentMines}`);
-//     }
-// }
-
-// ==============================================================================================

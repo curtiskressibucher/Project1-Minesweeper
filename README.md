@@ -105,7 +105,7 @@ Else if the game was lost:
 
 ![Original minesweeper](./Images/Screenshot%202023-10-19%20at%201.31.26%20pm.png)
 
-### The begining of the logic of my game.
+### The beginning of the logic.
 
 ![Game logic](./Images/Screenshot%202023-10-22%20at%2010.12.29%20am.png)
 
@@ -116,6 +116,12 @@ Else if the game was lost:
 ### Adding difficulty levels and playing game.
 
 ![Difficulty level](./Images/Screenshot%202023-10-26%20at%206.28.57%20pm.png)
+
+## Bugs to fix
+
+-   The difficulty levels are a little broken. If you click on a difficulty halfway through, it can cause a problem where cells that have already been clicked could become bombs.
+
+-   There is a bug when it comes to the board because I used a loop to create the divs that would be the cells. When trying to modify the size of the board in terms of rows, columns, or even just the board size, it can cause it to become strange and not work well as a grid.
 
 ## Learning along the way!
 
@@ -199,6 +205,53 @@ I learned how to add transitions to elements in CSS to create really nice hover 
 
 ## Future Features
 
--   he ability to store the player's personal record for finishing the game.
+-   The ability to store the player's personal record for finishing the game.
 -   Add more animations to the game.
 -   Include some cool sound effects.
+-   Making the project more resposnive.
+
+The biggest feature missing from my game is flood fill. I've worked very hard to make it work, but there is something wrong with the code. I built a function that should work, but after countless tweaking, I can't seem to make it work.
+
+```js
+// If it's not a mine:
+// - Reveal the selected cell
+//     - If the cell has no adjacent mines:
+//      - Reveal all adjacent cells with no mines recursively
+
+function floodFill(row, col) {
+    if (row < 0 || row >= rows || col < 0 || col >= columns) {
+        return;
+    }
+    const cell = board[row][col];
+
+    if (cell.isRevealed || cell.hasFlag) {
+        return;
+    }
+    cell.isRevealed = true;
+    cell.style.backgroundColor = 'darkgray';
+    const adjacentMines = countAdjacentMines(row, col);
+    // This part will make the flood fill recursive, so that it will check the cells in 3x3
+    if (adjacentMines === 0) {
+        for (let r = -1; r <= 1; r++) {
+            console.log(r);
+            for (let c = -1; c <= 1; c++) {
+                const newRow = row + r;
+                const newCol = col + c;
+                console.log(newCol, newRow);
+                if (
+                    newRow >= 0 &&
+                    newRow < rows &&
+                    newCol >= 0 &&
+                    newCol < columns
+                ) {
+                    floodFill(newRow, newCol);
+                }
+            }
+        }
+    } else {
+        cell.innerText = adjacentMines;
+        cell.style.backgroundColor = 'darkgray';
+        cell.classList.add(`mine-count-${adjacentMines}`);
+    }
+}
+```
