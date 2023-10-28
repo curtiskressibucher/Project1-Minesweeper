@@ -215,9 +215,13 @@ I learned how to add transitions to elements in CSS to create a really nice hove
 -   Add more animations to the game.
 -   Include some cool sound effects.
 -   Making the project more resposnive.
--   Adding a better reset game function where it doesnt have to reload the page to restart the game.
+-   Adding a better reset game function where it doesnt have to reload the page to restart the game board.
+-   Difficulty selection will include a larger board.
+-   Adding the ability for a win when the flags are placed exactly where the mines are.
 
-# Flood fill
+# 🚀 Cool tech
+
+## Flood fill
 
 The biggest challenge in this project was flood fill. After many hours of attempting to make the code below work, there was something inherently wrong with it. The line 'if (cell.isRevealed || cell.hasFlag)' wasn't finding the right coordinates for the function to fill in the remaining areas; it was only returning the singular cell. I found that without the return, it would create an infinite loop trying to find an empty cell. The new function I wrote explicitly finds the coordinates while using the DOM. So, the key difference between them is that the first function starts the fill from the specified cell and wasn't filling outwards, whereas the second function directly floods the area in which the cell is clicked.
 

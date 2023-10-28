@@ -58,8 +58,6 @@ h1 {
 }
 .board {
     position: relative;
-    width: 498px;
-    height: 498px;
     border: 10px solid darkgray;
     border-style: ridge;
     background-color: lightgray;
@@ -78,6 +76,10 @@ h1 {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+.board div:hover {
+    background-color: gray;
 }
 
 /*=====================================================================*/

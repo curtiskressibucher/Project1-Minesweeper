@@ -181,6 +181,11 @@ resetGame.addEventListener('click', function () {
 // Displays the current game board
 // -   Create an empty grid with cells roughly a 9x9(e.g., a 2D array)
 function renderBoard() {
+    let boardWidth = 53 * columns + 20;
+    document
+        .querySelector(`.board`)
+        .setAttribute(`style`, `width: ${boardWidth}px`);
+
     for (let r = 0; r < rows; r++) {
         let rows = [];
         for (let c = 0; c < columns; c++) {
@@ -273,7 +278,7 @@ function countAdjacentMines(row, col) {
                 newCol < columns
             ) {
                 if (board[newRow][newCol].isMine) {
-                    // console.log(board[newRow][newCol]);
+                    console.log(board[newRow][newCol]);
                     count++;
                 }
             }
