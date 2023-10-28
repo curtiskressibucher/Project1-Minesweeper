@@ -322,27 +322,30 @@ function floodFill(row, column) {
         for (let c = -1; c <= 1; c++) {
             const newRow = row + r;
             const newCol = column + c;
-
+            // Loops to go through neighboring cells around the givin cell, then calculates the new coordinates
             if (
                 newRow >= 0 &&
                 newRow < rows &&
                 newCol >= 0 &&
                 newCol < columns &&
                 !board[newRow][newCol].isRevealed
+                // Checking if it is within the game board boundries. Much like countAdjacentMines.
             ) {
                 const cell = board[newRow][newCol];
                 cell.isRevealed = true;
                 cellsRevealed++;
 
                 const adjacentMines = countAdjacentMines(newRow, newCol);
-
+                //if there are no adjacent mines recursively reveal neigboring cell
                 if (adjacentMines === 0) {
                     const clickedCell = document.getElementById(
                         `${newRow}-${newCol}`
                     );
                     clickedCell.style.backgroundColor = 'darkgray';
+                    // recursively call floodFill for the neighboring cell
                     floodFill(newRow, newCol);
                 } else {
+                    // If the cell are mines display the countadjacentmine.
                     const clickedCell = document.getElementById(
                         `${newRow}-${newCol}`
                     );
