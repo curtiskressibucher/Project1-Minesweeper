@@ -31,7 +31,7 @@ const advancedButton = document.querySelector('.advanced');
 // Initialise the game board:
 init();
 
-function init(rows, columns) {
+function init() {
     const minesCount = beginnerMineCount;
     renderBoard(rows, columns);
     mineCount = minesCount;
@@ -88,8 +88,9 @@ boardEl.addEventListener('click', function (event) {
         lostEl.innerText = 'Game Over! You hit a mine.';
         clearInterval(timer);
         timer = null;
-        bombEl.style.display = 'block';
-
+        setInterval(function () {
+            bombEl.style.display = 'block';
+        }, 500);
         return;
     } else {
         // Check if the cell is already revealed
@@ -101,6 +102,7 @@ boardEl.addEventListener('click', function (event) {
 
             if (adjacentMines === 0) {
                 clickedCell.style.backgroundColor = 'darkgray';
+                floodFill(row, column);
                 // If no adjacent mines, reveal adjacent cells recursively
             } else {
                 // Display the number of adjacent mines
@@ -271,7 +273,7 @@ function countAdjacentMines(row, col) {
                 newCol < columns
             ) {
                 if (board[newRow][newCol].isMine) {
-                    console.log(board[newRow][newCol]);
+                    // console.log(board[newRow][newCol]);
                     count++;
                 }
             }
@@ -304,6 +306,48 @@ function updateTimer() {
     //Link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
     const formatedTime = seconds.toString().padStart(3, '0');
     timerEl.innerText = formatedTime;
+}
+
+// If it's not a mine:
+// - Reveal the selected cell
+//     - If the cell has no adjacent mines:
+//      - Reveal all adjacent cells with no mines recursively
+function floodFill(row, column) {
+    for (let r = -1; r <= 1; r++) {
+        for (let c = -1; c <= 1; c++) {
+            const newRow = row + r;
+            const newCol = column + c;
+
+            if (
+                newRow >= 0 &&
+                newRow < rows &&
+                newCol >= 0 &&
+                newCol < columns &&
+                !board[newRow][newCol].isRevealed
+            ) {
+                const cell = board[newRow][newCol];
+                cell.isRevealed = true;
+                cellsRevealed++;
+
+                const adjacentMines = countAdjacentMines(newRow, newCol);
+
+                if (adjacentMines === 0) {
+                    const clickedCell = document.getElementById(
+                        `${newRow}-${newCol}`
+                    );
+                    clickedCell.style.backgroundColor = 'darkgray';
+                    floodFill(newRow, newCol);
+                } else {
+                    const clickedCell = document.getElementById(
+                        `${newRow}-${newCol}`
+                    );
+                    clickedCell.innerText = adjacentMines;
+                    clickedCell.style.backgroundColor = 'darkgray';
+                    clickedCell.classList.add(`mine-count-${adjacentMines}`);
+                }
+            }
+        }
+    }
 }
 
 // Hidding the gifs.

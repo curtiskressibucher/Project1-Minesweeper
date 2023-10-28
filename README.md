@@ -75,7 +75,7 @@ Check the selected cell:
     If it's not a mine:
     - Reveal the selected cell
         - If the cell has no adjacent mines:
-            * Flood fill al
+            * Flood fill
             - Reveal all adjacent cells with no mines recursively
         - If the cell has mines adjacent, display the corresponding number of mines touching that cell.
 
@@ -215,8 +215,11 @@ I learned how to add transitions to elements in CSS to create a really nice hove
 -   Add more animations to the game.
 -   Include some cool sound effects.
 -   Making the project more resposnive.
+-   Adding a better reset game function where it doesnt have to reload the page to restart the game.
 
-The biggest feature missing from my game is flood fill. I've worked very hard to make it work, but there is something wrong with the code. I built a function that should work, but after countless tweaking, I can't seem to make it work.
+# Flood fill
+
+The biggest challenge in this project was flood fill. After many hours of attempting to make the code below work, there was something inherently wrong with it. The line 'if (cell.isRevealed || cell.hasFlag)' wasn't finding the right coordinates for the function to fill in the remaining areas; it was only returning the singular cell. I found that without the return, it would create an infinite loop trying to find an empty cell. The new function I wrote explicitly finds the coordinates while using the DOM. So, the key difference between them is that the first function starts the fill from the specified cell and wasn't filling outwards, whereas the second function directly floods the area in which the cell is clicked.
 
 ```js
 // If it's not a mine:
@@ -261,3 +264,48 @@ function floodFill(row, col) {
     }
 }
 ```
+
+```js
+function floodFill(row, column) {
+    for (let r = -1; r <= 1; r++) {
+        for (let c = -1; c <= 1; c++) {
+            const newRow = row + r;
+            const newCol = column + c;
+
+            if (
+                newRow >= 0 &&
+                newRow < rows &&
+                newCol >= 0 &&
+                newCol < columns &&
+                !board[newRow][newCol].isRevealed
+            ) {
+                const cell = board[newRow][newCol];
+                cell.isRevealed = true;
+                cellsRevealed++;
+
+                const adjacentMines = countAdjacentMines(newRow, newCol);
+
+                if (adjacentMines === 0) {
+                    const clickedCell = document.getElementById(
+                        `${newRow}-${newCol}`
+                    );
+                    clickedCell.style.backgroundColor = 'darkgray';
+                    floodFill(newRow, newCol);
+                } else {
+                    const clickedCell = document.getElementById(
+                        `${newRow}-${newCol}`
+                    );
+                    clickedCell.innerText = adjacentMines;
+                    clickedCell.style.backgroundColor = 'darkgray';
+                    clickedCell.classList.add(`mine-count-${adjacentMines}`);
+                }
+            }
+        }
+    }
+}
+```
+
+All in all, flood fill was very challenging for me to understand. Despite numerous attempts at Googling and studying recursion, I remain unsure whether I've implemented the correct algorithm for the game logic. This uncertainty could potentially lead to problems in the future. However, it seems to be working in my testing.
+
+Link I used to learn and understand
+[Flood Fill Algorithum](https://www.geeksforgeeks.org/flood-fill-algorithm/)

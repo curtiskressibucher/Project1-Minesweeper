@@ -61,6 +61,7 @@ h1 {
     width: 498px;
     height: 498px;
     border: 10px solid darkgray;
+    border-style: ridge;
     background-color: lightgray;
     margin: 0 auto;
     display: flex;
@@ -87,6 +88,7 @@ h1 {
     width: 498px;
     height: 75px;
     border: 10px solid darkgray;
+    border-style: ridge;
     background-color: lightgray;
     margin: 0 auto;
     display: flex;
@@ -137,6 +139,13 @@ h1 {
     align-items: center;
     z-index: 2;
 }
+.bomb {
+    position: absolute;
+    border: none;
+    width: 490px;
+    height: 490px;
+    z-index: 1;
+}
 .win {
     font-family: 'Black Ops One', sans-serif;
     position: absolute;
@@ -145,14 +154,6 @@ h1 {
     text-align: center;
     display: flex;
     z-index: 2;
-}
-
-.bomb {
-    position: absolute;
-    border: none;
-    width: 490px;
-    height: 490px;
-    z-index: 1;
 }
 .trophy {
     position: absolute;
